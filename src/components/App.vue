@@ -5,7 +5,10 @@
             <mt-button icon="back">back</mt-button>
            </span>
        </mt-header>
-        <router-view></router-view>
+		<transition>
+			<router-view></router-view>
+		</transition>
+
 <!--        底部区域-->
         <nav class="bot-nav mui-bar mui-bar-tab">
 			<router-link class="mui-tab-item" to="/home">
@@ -37,5 +40,20 @@
 <style lang="scss" scoped>
 .container{
     padding-top: 40px;
+	padding-bottom: 50px;
+	overflow: hidden;
 }
+	.v-enter {
+		opacity: 0;
+		transform: translate(100%) ;
+	}
+	.v-leave-to {
+		position: absolute;
+		opacity: 0;
+		transform: translate(-100%) ;
+	}
+
+	.v-enter-active, .v-leave-active{
+		transition: all 0.4s ease;
+	}
 </style>
