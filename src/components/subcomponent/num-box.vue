@@ -1,7 +1,7 @@
 <template>
     <div class="mui-numbox" id="mui-numbox" data-numbox-min='0' data-numbox-max='100'>
       <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
-      <input class="mui-numbox-input" type="number" :value="this.initCount" @change="countChange" ref="count"/>
+      <input class="mui-numbox-input" type="number" :value="initCount" @change="countChange" ref="count"/>
       <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
     </div>
 </template>
@@ -14,9 +14,11 @@
             ...mapGetters(['countObj'])
         },
         methods: {
-            ...mapMutations(['addToCart']),
+            ...mapMutations(['updateCart']),
             countChange(){
-
+                 const val = parseInt(this.$refs.count.value)
+                const idstr = this.id.toString()
+                this.updateCart({id: idstr, count: val })
             }
         },
         mounted() {

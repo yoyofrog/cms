@@ -104,7 +104,7 @@
                 this.flag = !this.flag
                 // this.$store.commit("addToCart", {id: this.id, count: this.nums})
 
-                this.addToCart({id: this.id, count: this.nums})
+                this.addToCart({id: this.id, count: this.nums, selected: true, price: this.goodsInfo.sell_price })
             },
             beforeEnter(el) {
                 el.style.transform = 'translate(0,0)'
