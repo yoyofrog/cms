@@ -2,7 +2,7 @@
     <div class="container" >
        <mt-header fixed title="shop">
            <span to="/" slot="left">
-            <mt-button icon="back">back</mt-button>
+            <mt-button v-show="isShow" icon="back" @click="back">back</mt-button>
            </span>
        </mt-header>
 		<transition>
@@ -16,11 +16,11 @@
 				<span class="mui-tab-label">首页</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/member">
-				<span class="mui-icon mui-icon-contact"><span class="mui-badge">9</span></span>
+				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">会员</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/shopcart">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span id="badge" class="mui-badge">{{totalCount}}</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/search">
@@ -32,8 +32,30 @@
 </template>
 
 <script>
+	import {mapGetters} from 'vuex'
     export default {
-        name: "App"
+    	data(){
+    		return {
+    			isShow: false
+			}
+		},
+		methods: {
+        	back() {
+        		this.$router.back()
+			}
+		},
+		computed: {
+    		...mapGetters(['totalCount']),
+		},
+		watch:{
+        	"$route.path": function(newval) {
+        		if (newval === "/home") {
+        			this.isShow = false
+				} else {
+        			this.isShow = true
+				}
+			}
+		}
     }
 </script>
 
